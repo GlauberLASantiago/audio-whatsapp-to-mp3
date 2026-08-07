@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Converta áudios do WhatsApp para MP3 diretamente no navegador, sem enviar o arquivo para um servidor.">
+  <title>WhatsApp Áudio → MP3</title>
+  <style>
+    :root{--bg:#071116;--panel:#111b21;--panel2:#202c33;--text:#e9edef;--muted:#8696a0;--green:#00a884;--green2:#25d366;--border:#2a3942;--danger:#ff7474;--ok:#79e2af}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,rgba(0,168,132,.16),transparent 32rem),var(--bg);color:var(--text);display:grid;place-items:center;padding:24px}.app{width:min(780px,100%);background:rgba(17,27,33,.97);border:1px solid var(--border);border-radius:24px;box-shadow:0 18px 50px rgba(0,0,0,.36);overflow:hidden}header{padding:28px 28px 20px;border-bottom:1px solid var(--border)}.brand{display:flex;gap:14px;align-items:center}.logo{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--green),var(--green2));font-size:25px;box-shadow:0 8px 24px rgba(0,168,132,.25)}h1{margin:0;font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.03em}.subtitle{color:var(--muted);line-height:1.55;margin:8px 0 0}main{padding:28px}.dropzone{border:2px dashed #3b4a54;border-radius:20px;padding:38px 24px;text-align:center;cursor:pointer;background:rgba(32,44,51,.52);transition:.2s;outline:none}.dropzone:hover,.dropzone:focus-visible,.dropzone.dragover{border-color:var(--green);background:rgba(0,168,132,.08);transform:translateY(-1px)}.drop-icon{font-size:44px;margin-bottom:11px}.drop-title{font-weight:800;font-size:1.08rem}.drop-hint{color:var(--muted);margin-top:7px;font-size:.92rem}input[type=file]{display:none}.card{display:none;margin-top:20px;padding:18px;background:var(--panel2);border:1px solid var(--border);border-radius:18px}.card.visible{display:block}.file-info{display:flex;align-items:center;gap:14px}.file-icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:rgba(0,168,132,.14);font-size:22px}.file-text{min-width:0;flex:1}.file-name{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.file-meta{color:var(--muted);font-size:.88rem;margin-top:3px}.audio-preview{width:100%;margin-top:16px}.settings{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;margin-top:18px}label{display:block;color:var(--muted);font-size:.88rem;margin-bottom:8px}select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#182229;color:var(--text);font:inherit}button{border:0;border-radius:12px;padding:13px 20px;background:linear-gradient(135deg,var(--green),#00c08b);color:white;font-weight:800;font-size:.96rem;cursor:pointer;transition:.18s;min-width:190px}button:hover:not(:disabled){filter:brightness(1.08);transform:translateY(-1px)}button:disabled{opacity:.5;cursor:not-allowed}.progress-wrap{display:none;margin-top:22px}.progress-wrap.visible{display:block}.progress-head{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.9rem;margin-bottom:8px}.progress{height:10px;overflow:hidden;border-radius:999px;background:#0c1419;border:1px solid var(--border)}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--green2));transition:width .15s}.status{min-height:24px;margin-top:18px;color:var(--muted);line-height:1.45}.status.success{color:var(--ok)}.status.error{color:var(--danger)}.result{display:none;margin-top:18px;padding:18px;border:1px solid var(--border);border-radius:16px;background:rgba(0,168,132,.07)}.result.visible{display:block}.result-title{font-weight:800;margin-bottom:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.download{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 16px;border-radius:12px;background:var(--green);color:#fff;font-weight:800}.secondary{background:#26353d;min-width:auto}.note{margin-top:24px;padding:14px 16px;border:1px solid var(--border);border-radius:14px;color:var(--muted);font-size:.86rem;line-height:1.5;background:rgba(11,20,26,.55)}.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:rgba(37,211,102,.12);color:#89e9b3;font-size:.78rem;font-weight:700;margin-top:8px}@media(max-width:640px){body{padding:12px}header,main{padding:20px}.settings{grid-template-columns:1fr}button{width:100%}.actions{display:grid}.download{width:100%}}
+  </style>
+</head>
+<body>
+<section class="app">
+  <header>
+    <div class="brand"><div class="logo">🎵</div><div><h1>WhatsApp Áudio → MP3</h1><p class="subtitle">Converta mensagens de voz e outros arquivos de áudio para MP3 diretamente no navegador.</p><span class="badge">100% local • sem upload do áudio</span></div></div>
+  </header>
+  <main>
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Selecionar arquivo de áudio">
+      <div class="drop-icon">📥</div><div class="drop-title">Arraste o áudio aqui</div><div class="drop-hint">ou clique para selecionar • OPUS, OGG, M4A, AAC, WAV, MP3 e formatos que seu navegador consiga reproduzir</div>
+    </div>
+    <input id="fileInput" type="file" accept="audio/*,.opus,.ogg,.m4a,.aac,.wav,.webm,.mp3">
+
+    <div id="fileCard" class="card">
+      <div class="file-info"><div class="file-icon">🎧</div><div class="file-text"><div id="fileName" class="file-name"></div><div id="fileMeta" class="file-meta"></div></div></div>
+      <audio id="inputPreview" class="audio-preview" controls></audio>
+      <div class="settings">
+        <div><label for="bitrate">Qualidade do MP3</label><select id="bitrate"><option value="96">96 kbps — compacto</option><option value="128" selected>128 kbps — recomendado para voz</option><option value="192">192 kbps — alta qualidade</option><option value="256">256 kbps — muito alta</option></select></div>
+        <button id="convertBtn">Converter para MP3</button>
+      </div>
+    </div>
+
+    <div id="progressWrap" class="progress-wrap"><div class="progress-head"><span id="progressLabel">Preparando...</span><span id="progressValue">0%</span></div><div class="progress"><div id="progressBar" class="bar"></div></div></div>
+    <div id="status" class="status"></div>
+
+    <div id="result" class="result"><div class="result-title">MP3 pronto</div><audio id="outputPreview" class="audio-preview" controls></audio><div class="actions"><a id="downloadLink" class="download" href="#">⬇ Baixar MP3</a><button id="anotherBtn" class="secondary">Converter outro áudio</button></div></div>
+
+    <div class="note"><strong>Como funciona:</strong> o navegador decodifica o áudio para PCM e o codificador MP3 roda localmente em JavaScript. Esta versão não usa FFmpeg.wasm nem <code>SharedArrayBuffer</code>, eliminando o erro da versão anterior. O arquivo selecionado não é enviado ao GitHub nem a outro servidor.</div>
+  </main>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const fileInput=$('fileInput'), dropzone=$('dropzone'), fileCard=$('fileCard'), fileName=$('fileName'), fileMeta=$('fileMeta'), inputPreview=$('inputPreview'), bitrate=$('bitrate'), convertBtn=$('convertBtn'), progressWrap=$('progressWrap'), progressLabel=$('progressLabel'), progressValue=$('progressValue'), progressBar=$('progressBar'), status=$('status'), result=$('result'), outputPreview=$('outputPreview'), downloadLink=$('downloadLink'), anotherBtn=$('anotherBtn');
+  let selectedFile=null, inputURL=null, outputURL=null;
+
+  function formatBytes(bytes){const u=['B','KB','MB','GB'];if(!bytes)return'0 B';const i=Math.min(Math.floor(Math.log(bytes)/Math.log(1024)),u.length-1);return (bytes/Math.pow(1024,i)).toFixed(i?1:0)+' '+u[i]}
+  function setStatus(msg,type=''){status.textContent=msg;status.className='status'+(type?' '+type:'')}
+  function setProgress(p,label){p=Math.max(0,Math.min(100,Math.round(p)));progressWrap.classList.add('visible');progressBar.style.width=p+'%';progressValue.textContent=p+'%';if(label)progressLabel.textContent=label}
+  function safeBaseName(name){return (name.replace(/\.[^/.]+$/,'').replace(/[<>:"/\\|?*\x00-\x1F]/g,'_').trim()||'audio_whatsapp')}
+  function floatTo16BitPCM(float32){const out=new Int16Array(float32.length);for(let i=0;i<float32.length;i++){const s=Math.max(-1,Math.min(1,float32[i]));out[i]=s<0?s*0x8000:s*0x7fff}return out}
+  function resetOutput(){if(outputURL){URL.revokeObjectURL(outputURL);outputURL=null}result.classList.remove('visible');outputPreview.removeAttribute('src');downloadLink.removeAttribute('href');progressWrap.classList.remove('visible');progressBar.style.width='0%';setStatus('')}
+  function chooseFile(file){if(!file)return;selectedFile=file;resetOutput();if(inputURL)URL.revokeObjectURL(inputURL);inputURL=URL.createObjectURL(file);inputPreview.src=inputURL;fileName.textContent=file.name;fileMeta.textContent=formatBytes(file.size)+(file.type?' • '+file.type:'');fileCard.classList.add('visible')}
+
+  dropzone.addEventListener('click',()=>fileInput.click());
+  dropzone.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fileInput.click()}});
+  fileInput.addEventListener('change',()=>chooseFile(fileInput.files[0]));
+  ['dragenter','dragover'].forEach(n=>dropzone.addEventListener(n,e=>{e.preventDefault();dropzone.classList.add('dragover')}));
+  ['dragleave','drop'].forEach(n=>dropzone.addEventListener(n,e=>{e.preventDefault();dropzone.classList.remove('dragover')}));
+  dropzone.addEventListener('drop',e=>chooseFile(e.dataTransfer.files[0]));
+
+  async function decodeFile(file){
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)throw new Error('Seu navegador não oferece a Web Audio API necessária. Use uma versão recente do Chrome, Edge, Firefox ou Safari.');
+    const ctx=new AudioCtx();
+    try{return await ctx.decodeAudioData(await file.arrayBuffer())}finally{ctx.close().catch(()=>{})}
+  }
+
+  async function encodeMp3(audioBuffer,kbps){
+    if(!window.lamejs)throw new Error('O codificador MP3 não foi carregado. Verifique sua conexão e recarregue a página.');
+    const channels=Math.min(audioBuffer.numberOfChannels,2);
+    const sampleRate=audioBuffer.sampleRate;
+    const left=floatTo16BitPCM(audioBuffer.getChannelData(0));
+    const right=channels===2?floatTo16BitPCM(audioBuffer.getChannelData(1)):null;
+    const encoder=new lamejs.Mp3Encoder(channels,sampleRate,kbps);
+    const block=1152;
+    const chunks=[];
+    for(let i=0;i<left.length;i+=block){
+      const l=left.subarray(i,i+block);const mp3=channels===2?encoder.encodeBuffer(l,right.subarray(i,i+block)):encoder.encodeBuffer(l);if(mp3.length)chunks.push(new Int8Array(mp3));
+      if(i%(block*24)===0){setProgress(35+(i/left.length)*60,'Codificando MP3...');await new Promise(r=>setTimeout(r,0))}
+    }
+    const end=encoder.flush();if(end.length)chunks.push(new Int8Array(end));return new Blob(chunks,{type:'audio/mpeg'});
+  }
+
+  convertBtn.addEventListener('click',async()=>{
+    if(!selectedFile){setStatus('Selecione um arquivo de áudio primeiro.','error');return}
+    convertBtn.disabled=true;resetOutput();
+    try{
+      setProgress(5,'Lendo o arquivo...');setStatus('Preparando o áudio...');
+      const audioBuffer=await decodeFile(selectedFile);
+      setProgress(30,'Áudio decodificado');
+      const mp3Blob=await encodeMp3(audioBuffer,Number(bitrate.value));
+      setProgress(100,'Concluído');
+      outputURL=URL.createObjectURL(mp3Blob);outputPreview.src=outputURL;
+      const outName=safeBaseName(selectedFile.name)+'.mp3';downloadLink.href=outputURL;downloadLink.download=outName;downloadLink.textContent='⬇ Baixar '+outName;result.classList.add('visible');setStatus('Conversão concluída. Ouça o resultado ou baixe o MP3.','success');
+    }catch(err){console.error(err);let msg=err&&err.message?err.message:String(err);if(/decode|encoding|Unable to decode/i.test(msg))msg='O navegador não conseguiu decodificar este arquivo. Para áudios do WhatsApp, tente usar Chrome ou Edge atualizados. Arquivo recebido: '+selectedFile.name;setStatus(msg,'error');progressLabel.textContent='Erro'}finally{convertBtn.disabled=false}
+  });
+
+  anotherBtn.addEventListener('click',()=>{selectedFile=null;fileInput.value='';fileCard.classList.remove('visible');if(inputURL){URL.revokeObjectURL(inputURL);inputURL=null}inputPreview.removeAttribute('src');resetOutput();dropzone.focus()});
+})();
+</script>
+</body>
+</html>
